@@ -3,10 +3,9 @@ package configs
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/Yefhem/rest-api-cleancode/models"
-	"github.com/joho/godotenv"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -18,18 +17,18 @@ func SetupDatabaseConnection() *gorm.DB {
 		err   error
 	)
 
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error getting env, not comming through %v", err)
-	} else {
-		fmt.Println("We are getting the env values")
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Fatalf("Error getting env, not comming through %v", err)
+	// } else {
+	// 	fmt.Println("We are getting the env values")
+	// }
 
-	dbDriver := os.Getenv("DB_DRIVER")
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUsername := os.Getenv("DB_USERNAME")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	dbDriver := "postgres"                 //os.Getenv("DB_DRIVER")
+	dbHost := "127.0.0.1"                  //os.Getenv("DB_HOST")
+	dbPort := "5432"                       //os.Getenv("DB_PORT")
+	dbUsername := "postgres"               //os.Getenv("DB_USERNAME")
+	dbPassword := "admin"                  //os.Getenv("DB_PASSWORD")
+	dbName := "my_first_postgres_database" //os.Getenv("DB_NAME")
 
 	if dbDriver == "postgres" {
 		DBURL = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUsername, dbPassword, dbName)
@@ -56,4 +55,12 @@ func SetupDatabaseConnection() *gorm.DB {
 
 	DB.AutoMigrate(&models.User{}, &models.Product{})
 	return DB
+}
+
+func CloseDatabaseConnection(db *gorm.DB) {
+	dbSQL, err := db.DB()
+	if err != nil {
+		panic("Failed to close connection from database")
+	}
+	dbSQL.Close()
 }

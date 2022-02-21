@@ -54,7 +54,7 @@ func VerifyPassword(hashedPassword, password string) bool {
 // User password yukarıdaki hashAndSalt fonk. ile hashlendikten sonra db'ye kaydedilir...
 func (db *userConnection) InsertUser(user models.User) models.User {
 	user.Password = HashPassword(user.Password)
-	db.connection.Save(&user)
+	db.connection.Create(&user)
 	return user
 }
 
