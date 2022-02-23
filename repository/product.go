@@ -6,6 +6,11 @@ import (
 )
 
 type ProductRepository interface {
+	InsertProduct(product models.Product) models.Product
+	UpdateProduct(product models.Product) models.Product
+	DeleteProduct(product models.Product)
+	FindProductByID(pID uint64) models.Product
+	AllProduct() []models.Product
 }
 
 type productConnection struct {
@@ -34,8 +39,8 @@ func (db *productConnection) UpdateProduct(product models.Product) models.Produc
 	return product
 }
 
-// DeleteBook
-func (db *productConnection) DeleteBook(product models.Product) {
+// DeleteProduct
+func (db *productConnection) DeleteProduct(product models.Product) {
 	db.connection.Delete(&product)
 }
 
@@ -46,8 +51,8 @@ func (db *productConnection) FindProductByID(pID uint64) models.Product {
 	return product
 }
 
-// AllBook
-func (db *productConnection) AllBook() []models.Product {
+// AllProduct
+func (db *productConnection) AllProduct() []models.Product {
 	var products []models.Product
 	db.connection.Preload("User").Find(&products)
 	return products

@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/Yefhem/rest-api-cleancode/models"
@@ -41,15 +40,15 @@ func HashPassword(password string) string {
 }
 
 // Parolayı doğrulama
-func VerifyPassword(hashedPassword, password string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-	if err != nil {
-		log.Println(err)
-		fmt.Println("parola doğrulanamadı")
-		return false
-	}
-	return true
-}
+// func VerifyPassword(hashedPassword, password string) bool {
+// 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+// 	if err != nil {
+// 		log.Println(err)
+// 		fmt.Println("parola doğrulanamadı")
+// 		return false
+// 	}
+// 	return true
+// }
 
 // User password yukarıdaki hashAndSalt fonk. ile hashlendikten sonra db'ye kaydedilir...
 func (db *userConnection) InsertUser(user models.User) models.User {

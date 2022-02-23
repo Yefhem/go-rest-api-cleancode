@@ -1,5 +1,6 @@
 package dto
 
+// UserUpdateDTO...
 type UserUpdateDTO struct {
 	ID       uint64 `json:"id" form:"id"`
 	Nickname string `json:"nickname" form:"nickname" binding:"required"`
