@@ -12,7 +12,7 @@ import (
 
 type ProductService interface {
 	Insert(p dto.ProductCreateDTO) models.Product
-	Update(p dto.ProductCreateDTO) models.Product
+	Update(p dto.ProductUpdateDTO) models.Product
 	Delete(p models.Product)
 	All() []models.Product
 	FindByID(productID uint64) models.Product
@@ -38,7 +38,7 @@ func (service *productService) Insert(p dto.ProductCreateDTO) models.Product {
 	return res
 }
 
-func (service *productService) Update(p dto.ProductCreateDTO) models.Product {
+func (service *productService) Update(p dto.ProductUpdateDTO) models.Product {
 	product := models.Product{}
 	if err := smapping.FillStruct(&product, smapping.MapFields(&p)); err != nil {
 		log.Fatalf("Failed map %v: ", err)

@@ -11,6 +11,10 @@ import (
 )
 
 type AuthService interface {
+	VerifyCredential(email string, password string) interface{}
+	CreateUser(user dto.RegisterDTO) models.User
+	FindByEmail(email string) models.User
+	IsDuplicateEmail(email string) bool
 }
 
 type authService struct {

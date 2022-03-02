@@ -18,3 +18,13 @@ type ProductCreateDTO struct {
 	StockStatus bool   `json:"stock_status" form:"stock_status" binding:"required"`
 	UserID      uint64 `json:"user_id,omitempty" form:"user_id,omitempty"`
 }
+
+/*
+{
+	"title":"Gezer Erkek Terlik",
+	"description":"35-46 numara arası konforlu, plastik, dikişli erkek terliği.",
+	"price":50,
+	"stock":10,
+	"stock_status":true
+}
+*/
